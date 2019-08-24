@@ -1,0 +1,8 @@
+node_modules/
+dist/
+apidoc/
+.idea/
+.idea/vcs.xml
+npm-debug.log
+.DS_Store
+test/.DS_Store

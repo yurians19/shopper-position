@@ -1,0 +1,43 @@
+{
+  "name": "shopper-position-ms",
+  "version": "1.0.0",
+  "description": "shopper-position-ms",
+  "main": "index.js",
+  "repository": {
+    "type": "git"
+  },
+  "dependencies": {
+    "ajv": "^6.9.1",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "knex": "^0.13.0",
+    "lodash": "^4.17.11",
+    "log4js": "^3.0.6",
+    "mocha": "^3.5.3",
+    "mocha-junit-reporter": "^1.13.0",
+    "mocha-multi-reporters": "^1.1.4",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.21",
+    "newrelic": "^4.9.0",
+    "nodemon": "^1.19.1",
+    "nyc": "^13.1.0",
+    "pg": "^7.2.0",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "sinon": "^7.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "pretest": "npm install",
+    "test": "./node_modules/.bin/mocha test/**/*Test.js"
+  }
+}
