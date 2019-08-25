@@ -17,33 +17,33 @@ ShopperPositionService.newPosition = async (shopperId, body) => {
         const cacheGet =  await Cache.get(shopperId)
         if (cacheGet) {
 
-          const { timeIni, timeFin, date: dateget } = cacheGet
+          const { timeIni, timeFin, date: dateGet } = cacheGet
           const _timeIni = moment(/* new Date(timeIni) */ /* "2019-08-22T17:35:50.307" */)
           const _timeFin = moment(/* new Date(timeFin) */ /* "2019-08-22T23:59:50.307" */)
           const timeNoConnect = timeCurrent.diff(_timeFin, 'seconds')
-          console.log('dateget',dateget,cacheGet,_timeIni,_timeFin);
-          if (date!==dateget) dataSQL.date = dateget
+          //console.log('Datos',dateGet,cacheGet,timeIni,timeFin);
+          if (date!==dateGet) dataSQL.date = dateGet
 
           if ( timeNoConnect >= 120) {
 
-            console.log('existe en cache y el tiempo sin conexion es mayor a 1 minutos');
+            //console.log('existe en cache y el tiempo sin conexion es mayor a 1 minutos');
             await saveOldTime(shopperId,dataCache,dataSQL,_timeIni,_timeFin)
 
           }else{
-            console.log('existe en cache y el tiempo sin conexion es menor a -1 minutos');
 
+            //console.log('existe en cache y el tiempo sin conexion es menor a -1 minutos');
             const cacheSave = await Cache.save(shopperId,{/* date:'2019-08-21', */timeFin: timeCurrent.toString(), lat, lng})
-            if (date!==dateget) await saveOldTime(shopperId,dataCache,dataSQL,_timeIni,_timeFin)
+            if (date!==dateGet) await saveOldTime(shopperId,dataCache,dataSQL,_timeIni,_timeFin)
 
           }
 
         } else {
-          console.log(' NOO existe en cache y pero si en SQL');
+          //console.log(' NOO existe en cache y pero si en SQL');
           const cacheSave = await Cache.save(shopperId,dataCache)
           const timeConnectDay = await AsyncSave.send(dataSQL)
           if (!timeConnectDay) {
             
-            console.log(' NOO existe en cache y y tampoco en SQL');
+            //console.log(' NOO existe en cache y y tampoco en SQL');
             const asyncSave = await AsyncSave.receive(dataSQL)
 
           }
@@ -61,8 +61,6 @@ const saveOldTime = async (shopperId,dataCache,dataSQL,_timeIni,_timeFin) => {
             const cacheSave = await Cache.save(shopperId,dataCache)
             const timeConnectDay = await AsyncSave.send(dataSQL)
             dataSQL.timeConnectDay = Number(timeConnectDay) + Number(_timeFin.diff(_timeIni, 'seconds'))
-            console.log(shopperId,dataCache,dataSQL,_timeIni,_timeFin,timeConnectDay);
-            
             const asyncSave = await AsyncSave.update(dataSQL)
     } catch (error) {
       throw Error

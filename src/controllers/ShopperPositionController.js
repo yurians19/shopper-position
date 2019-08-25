@@ -26,8 +26,10 @@ ShopperPositionController.insert = async (req, res) => {
       const { params: { shopperId } = {}, body } = req;
       const {lat, lng} = body;
       const errors = validationResult(req)
-      if(!Number.isInteger(lat) || !Number.isInteger(lng))
+      if(Number.isInteger(lat) || Number.isInteger(lng)){
+      console.log(!Number.isInteger(lng));
         res.status(400).send({message:'error'})
+        }
       else{
           if (!errors.isEmpty()) {
             codeErr = 400

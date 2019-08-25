@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.242" tests="7" failures="1">
-  <testsuite name="Root Suite" timestamp="2019-08-25T04:02:50" tests="0" failures="0" time="0">
-  </testsuite>
-  <testsuite name="test" timestamp="2019-08-25T04:02:50" tests="0" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="0" time="0">
-  </testsuite>
-  <testsuite name="healthcheck" timestamp="2019-08-25T04:02:50" tests="1" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="0" time="0.044">
-    <testcase name="test healthcheck success" time="0.044" classname="success">
+<testsuites name="Mocha Tests" time="0.20500000000000002" tests="7" failures="2">
+  <testsuite name="Root Suite" timestamp="2019-08-25T05:16:30" tests="0" failures="1" time="0">
+    <testcase name=" Uncaught error outside test suite" time="0" classname="Uncaught error outside test suite">
+      <failure message="listen EADDRINUSE: address already in use :::8000" type="Error"><![CDATA[Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (net.js:1279:14)
+    at listenInCluster (net.js:1327:12)
+    at Server.listen (net.js:1414:7)
+    at Function.listen (node_modules\express\lib\application.js:618:24)
+    at Object.<anonymous> (index.js:15:5)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (test\unit\PositionServiceTest.js:5:13)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Array.forEach (<anonymous>)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)]]></failure>
     </testcase>
   </testsuite>
-  <testsuite name="error handler" timestamp="2019-08-25T04:02:51" tests="3" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="0" time="0.046">
-    <testcase name="test error handler 404" time="0.035" classname="404">
-    </testcase>
-    <testcase name="test error handler 400 empty body" time="0.006" classname="400 empty body">
-    </testcase>
-    <testcase name="test error handler 400 body error" time="0.005" classname="400 body error">
+  <testsuite name="test" timestamp="2019-08-25T05:16:30" tests="0" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="healthcheck" timestamp="2019-08-25T05:16:30" tests="1" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="0" time="0.04">
+    <testcase name="test healthcheck success" time="0.04" classname="success">
     </testcase>
   </testsuite>
-  <testsuite name="endpoint" timestamp="2019-08-25T04:02:51" tests="3" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="1" time="0.152">
-    <testcase name="test endpoint 200" time="0.019" classname="200">
+  <testsuite name="error handler" timestamp="2019-08-25T05:16:30" tests="3" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="0" time="0.07100000000000001">
+    <testcase name="test error handler 404" time="0.052" classname="404">
     </testcase>
-    <testcase name="test endpoint cache" time="0.12" classname="cache">
+    <testcase name="test error handler 400 empty body" time="0.013" classname="400 empty body">
+    </testcase>
+    <testcase name="test error handler 400 body error" time="0.006" classname="400 body error">
+    </testcase>
+  </testsuite>
+  <testsuite name="endpoint" timestamp="2019-08-25T05:16:30" tests="3" file="C:\Users\yuria\Documents\shopper-position-nodejs\test\unit\PositionServiceTest.js" failures="1" time="0.094">
+    <testcase name="test endpoint 200" time="0.018" classname="200">
+    </testcase>
+    <testcase name="test endpoint cache" time="0.065" classname="cache">
       <failure message="Internal Server Error" type="Error"><![CDATA[Error: Internal Server Error
     at Test.Request.callback (node_modules\superagent\lib\node\index.js:626:17)
     at node_modules\superagent\lib\node\index.js:795:18
@@ -27,7 +59,7 @@
     at endReadableNT (_stream_readable.js:1145:12)
     at process._tickCallback (internal/process/next_tick.js:63:19)]]></failure>
     </testcase>
-    <testcase name="test endpoint async save" time="0.013" classname="async save">
+    <testcase name="test endpoint async save" time="0.011" classname="async save">
     </testcase>
   </testsuite>
 </testsuites>
