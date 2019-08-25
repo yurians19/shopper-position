@@ -1,6 +1,7 @@
 const ShopperPositionController = module.exports;
 
 const ShopperPositionService = require('../services/ShopperPositionService');
+const { validationResult } = require('express-validator');
 
 // To complete
 /**
@@ -20,22 +21,34 @@ const ShopperPositionService = require('../services/ShopperPositionService');
  * @apiError (400) {null} Error if object param is invalid
  * @apiError (500) {Object} Error on internal runtime, should return nothing.
  */
+
 ShopperPositionController.insert = async (req, res) => {
-    const { params: { shopperId } = {}, query } = req;
-    const {lat, lng} = query;
-    if (typeof shopperId == 'number' && typeof lat == 'number' && typeof lng == 'number') {
-      res.status(404).send({message:'data invalid'})
-    }
-    try {
-      const shopperPositionService = await ShopperPositionService.newPosition(shopperId, query)
-      if (shopperPositionService) {
-        res.status(200).send({message:shopperPositionService})
-      } else {
-        res.status(404).send({message:'Not insert'})
+      const { params: { shopperId } = {}, body } = req;
+      const {lat, lng} = body;
+      const errors = validationResult(req)
+      if(!Number.isInteger(lat) || !Number.isInteger(lng))
+        res.status(400).send({message:'error'})
+      else{
+          if (!errors.isEmpty()) {
+            codeErr = 400
+            errors.array().forEach(element => {
+                if (element.location !== 'body') codeErr = 404
+              });
+              res.status(codeErr).send({message:'error'})
+
+          }  else {
+              
+              try {
+                const shopperPositionService = await ShopperPositionService.newPosition(shopperId, body)
+                if (shopperPositionService)
+                  res.status(200).send({message:shopperPositionService})
+                else 
+                  res.status(404).send({message:'Not insert'})
+              } catch (error) {
+                console.log('error',error);
+                res.status(500).send({message:'error internal'})
+                throw Error
+              }
+            }
       }
-    } catch (error) {
-      console.log('error',error);
-      res.status(500).send({message:'error internal'})
-      throw Error
-    }
 };

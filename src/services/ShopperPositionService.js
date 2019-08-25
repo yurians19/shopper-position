@@ -5,24 +5,24 @@ const AsyncSave = require('../asyncSave/AsyncSave');
 
 const moment = require('moment')
 
-const timeCurrent = moment(/* "2019-08-22T00:30:10.307" */)
-const date = moment().format("YYYY-MM-DD"/*  '2019-08-22' */)
 
-    ShopperPositionService.newPosition = async (shopperId, body) => {
+ShopperPositionService.newPosition = async (shopperId, body) => {
+      const date = moment().format("YYYY-MM-DD"/*  '2019-08-22' */)
+      const timeCurrent = moment(/* "2019-08-22T00:30:10.307" */)
       let res = 'ok'
       const { lat, lng } = body
-      const dataCache = {/* date:'2019-08-21', */shopperId, lat, lng , timeIni: timeCurrent.toString(), timeFin: timeCurrent.toString()}
+      const dataCache = {/* date:'2019-08-21', */date, shopperId, lat, lng , timeIni: timeCurrent.toString(), timeFin: timeCurrent.toString()}
       const dataSQL = {shopperId, lat, lng, timeConnectDay: 0, date}
       try {
         const cacheGet =  await Cache.get(shopperId)
         if (cacheGet) {
 
           const { timeIni, timeFin, date: dateget } = cacheGet
-          const _timeIni = moment(new Date(timeIni) /* "2019-08-22T17:35:50.307" */)
-          const _timeFin = moment(new Date(timeFin) /* "2019-08-22T23:59:50.307" */)
+          const _timeIni = moment(/* new Date(timeIni) */ /* "2019-08-22T17:35:50.307" */)
+          const _timeFin = moment(/* new Date(timeFin) */ /* "2019-08-22T23:59:50.307" */)
           const timeNoConnect = timeCurrent.diff(_timeFin, 'seconds')
+          console.log('dateget',dateget,cacheGet,_timeIni,_timeFin);
           if (date!==dateget) dataSQL.date = dateget
-          console.log(date,dateget,timeCurrent,timeNoConnect,_timeIni,_timeFin);
 
           if ( timeNoConnect >= 120) {
 
@@ -61,6 +61,8 @@ const saveOldTime = async (shopperId,dataCache,dataSQL,_timeIni,_timeFin) => {
             const cacheSave = await Cache.save(shopperId,dataCache)
             const timeConnectDay = await AsyncSave.send(dataSQL)
             dataSQL.timeConnectDay = Number(timeConnectDay) + Number(_timeFin.diff(_timeIni, 'seconds'))
+            console.log(shopperId,dataCache,dataSQL,_timeIni,_timeFin,timeConnectDay);
+            
             const asyncSave = await AsyncSave.update(dataSQL)
     } catch (error) {
       throw Error

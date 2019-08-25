@@ -6,7 +6,8 @@ const ShoppersPositionRepository = module.exports;
 
 // To complete
 ShoppersPositionRepository.get = async (data) => {
-    const  {shopperId, date} = data 
+    const  {shopperId, date} = data
+    console.log('data get',data);
     let res = 0
         try {
             const timeConnectDay = await db.select('timeConnectDay').from(shopperPosition).where({date: date, shopperId:  shopperId}) 
@@ -19,6 +20,7 @@ ShoppersPositionRepository.get = async (data) => {
         }
 };
 ShoppersPositionRepository.update = async (data) => {
+    console.log('data update',data);
     const  {shopperId, date, timeConnectDay} = data 
         try {
             const res = await db(shopperPosition).where({shopperId:shopperId,date:date}).update({timeConnectDay:timeConnectDay}) 
@@ -30,6 +32,7 @@ ShoppersPositionRepository.update = async (data) => {
         }
 };
 ShoppersPositionRepository.insert = async (data) => {
+        console.log('data insert',data);
         try {
             const res = await db.insert(data).returning('*').into(shopperPosition)  
             console.log(`${chalk.green('[sql-insert]')}`,res)
