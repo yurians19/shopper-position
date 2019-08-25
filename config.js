@@ -2,10 +2,10 @@ const { env } = process;
 const {
   TIMEZONE = 'America/Bogota',
   COUNTRY,
-  DB_CONNECTION = { host: 'localhost', 
+  DB_CONNECTION /* = { host: 'localhost', 
                     database: 'shopper-position-db',
                     user : 'postgres',
-                    password : '12345'},
+                    password : '12345'} */,
   CONNECTION_POOL_SIZE,
 } = env;
 

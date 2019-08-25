@@ -20,7 +20,6 @@ ShoppersPositionRepository.get = async (data) => {
         }
 };
 ShoppersPositionRepository.update = async (data) => {
-    console.log('data update',data);
     const  {shopperId, date, timeConnectDay} = data 
         try {
             const res = await db(shopperPosition).where({shopperId:shopperId,date:date}).update({timeConnectDay:timeConnectDay}) 

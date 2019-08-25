@@ -18,8 +18,8 @@ ShopperPositionService.newPosition = async (shopperId, body) => {
         if (cacheGet) {
 
           const { timeIni, timeFin, date: dateGet } = cacheGet
-          const _timeIni = moment(/* new Date(timeIni) */ /* "2019-08-22T17:35:50.307" */)
-          const _timeFin = moment(/* new Date(timeFin) */ /* "2019-08-22T23:59:50.307" */)
+          const _timeIni = moment(new Date(timeIni) /* "2019-08-22T17:35:50.307" */)
+          const _timeFin = moment(new Date(timeFin) /* "2019-08-22T23:59:50.307" */)
           const timeNoConnect = timeCurrent.diff(_timeFin, 'seconds')
           //console.log('Datos',dateGet,cacheGet,timeIni,timeFin);
           if (date!==dateGet) dataSQL.date = dateGet

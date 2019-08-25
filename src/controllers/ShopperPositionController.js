@@ -26,31 +26,30 @@ ShopperPositionController.insert = async (req, res) => {
       const { params: { shopperId } = {}, body } = req;
       const {lat, lng} = body;
       const errors = validationResult(req)
-      if(Number.isInteger(lat) || Number.isInteger(lng)){
-      console.log(!Number.isInteger(lng));
+      if(!Number.isInteger(lat) || !Number.isInteger(lng)){
         res.status(400).send({message:'error'})
-        }
-      else{
-          if (!errors.isEmpty()) {
-            codeErr = 400
-            errors.array().forEach(element => {
-                if (element.location !== 'body') codeErr = 404
-              });
-              res.status(codeErr).send({message:'error'})
+      } else {
 
-          }  else {
-              
-              try {
-                const shopperPositionService = await ShopperPositionService.newPosition(shopperId, body)
-                if (shopperPositionService)
-                  res.status(200).send({message:shopperPositionService})
-                else 
-                  res.status(404).send({message:'Not insert'})
-              } catch (error) {
-                console.log('error',error);
-                res.status(500).send({message:'error internal'})
-                throw Error
-              }
+                if (!errors.isEmpty()) {
+                  codeErr = 400
+                  errors.array().forEach(element => {
+                      if (element.location !== 'body') codeErr = 404
+                    });
+                    res.status(codeErr).send({message:'error'})
+
+                }  else {
+                    
+                    try {
+                      const shopperPositionService = await ShopperPositionService.newPosition(shopperId, body)
+                      if (shopperPositionService)
+                        res.status(200).send({message:shopperPositionService})
+                      else 
+                        res.status(404).send({message:'Not insert'})
+                    } catch (error) {
+                      console.log('error',error);
+                      res.status(500).send({message:'error internal'})
+                      throw Error
+                    }
+                  }
             }
-      }
 };
